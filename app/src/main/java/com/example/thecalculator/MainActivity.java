@@ -3,23 +3,30 @@ package com.example.thecalculator;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
-import javax.script.ScriptException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     GestureDetector gestureDetector;
+    ScaleGestureDetector scaleDetector;
+
     ScriptEngine js_engine;
 
     TextView user_input_view;
     TextView result_output_view;
+
+    LinearLayout numPad;
+    ConstraintLayout container;
 
     String calculus = "";
 
@@ -28,15 +35,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        gestureDetector = new GestureDetector(new SingleTapConfirm());
+        scaleDetector = new ScaleGestureDetector(this, new ScaleListener());
+
         ScriptEngineManager mgr = new ScriptEngineManager();
         js_engine = mgr.getEngineByName("javascript");
-
-        // Layout
-        LinearLayout numPad = (LinearLayout)findViewById(R.id.NumPad);
 
         // Output
         user_input_view = (TextView)findViewById(R.id.text_input);
         result_output_view =  (TextView)findViewById(R.id.text_result);
+
+        // Layout
+        container = (ConstraintLayout)findViewById(R.id.container);
+        numPad = (LinearLayout)findViewById(R.id.NumPad);
+
+        ImageView trackpad = (ImageView) findViewById(R.id.trackpad);
+        trackpad.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (scaleDetector.onTouchEvent(motionEvent)) {
+                    result_output_view.setText("Tap");
+                    return false;
+                } else {
+                    result_output_view.setText("Zoom");
+                    scaleDetector.onTouchEvent(motionEvent);
+                    return true;
+                }
+            }
+        });
 
         // Numbers
         Button btn_num1 = (Button)findViewById(R.id.btn_1_row_3);
@@ -80,18 +106,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //});
     }
 
-    // CLICK HANDLER
+    // CLICK
     @Override
     public void onClick(View v) {
-        // This should be executed if Android recognised a Button click
-        switch (v.getId()) {
-            case R.id.btn_1_row_1:
-                // Do stuff
-                break;
-        }
+        user_input_view.setText("Input here");
     }
 
-    // HOW TO HANDLE ZOOM GESTURE?
+    private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent event) {
+            return true;
+        }
+
+        //@Override
+        //public boolean onDown(MotionEvent event) { return true; }
+    }
+
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+        float factor = 1;
+
+        @Override
+        public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
+            factor *= scaleGestureDetector.getScaleFactor();
+            factor = Math.max(0.85f, Math.min(factor, 1.2f));
+            setNumPadScaleFactor(factor);
+
+            return true;
+        }
+
+        @Override
+        public void onScaleEnd(ScaleGestureDetector scaleGestureDetector){
+            // Snapping Sensitivity
+            if(factor <= 0.9f) {
+                factor = 0.85f;
+            } else if (factor < 1.1f) {
+                factor = 1f;
+            } else if (factor <= 1.2f) {
+                factor = 1.2f;
+            }
+
+            setNumPadScaleFactor(factor);
+        }
+
+        private void setNumPadScaleFactor(float factor) {
+            numPad.setScaleX(factor);
+            numPad.setScaleY(factor);
+            numPad.setPivotX(0);
+            numPad.setPivotY(numPad.getHeight());
+        }
+    }
 
     //private Boolean LastInputIsOperator(){
     //    if (calculus.endsWith("+") || calculus.endsWith("-") || calculus.endsWith("*") || calculus.endsWith("/")) {
