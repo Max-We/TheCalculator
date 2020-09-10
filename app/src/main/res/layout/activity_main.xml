@@ -332,7 +332,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 style="@style/NumPad_btn"
-                android:text="," />
+                android:text="." />
 
             <Button
                 android:id="@+id/btn_op_divide"

@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
+import javax.script.ScriptException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ScaleGestureDetector scaleDetector;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout numPad;
     ConstraintLayout container;
 
-    String calculus = "";
+    String arithmetic = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         trackpad.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (onSingleTap.onTouchEvent(motionEvent)) {
+                if (true) {
                     result_output_view.setText("tap");
                     return false;
                 } else {
@@ -86,9 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btn_num0 = findViewById(R.id.btn_num_0);
         btn_num0.setOnClickListener(this);
 
-        // Basic Operators
-        Button btn_plus = (Button)findViewById(R.id.btn_result);
-        btn_plus.setOnClickListener(this);
+        // Operators
         Button btn_minus = (Button)findViewById(R.id.btn_op_plus);
         btn_minus.setOnClickListener(this);
         Button btn_multiply = (Button)findViewById(R.id.btn_op_subtract);
@@ -98,18 +97,91 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btn_equals = (Button)findViewById(R.id.btn_op_divide);
         btn_equals.setOnClickListener(this);
 
+        // Serparators
+        Button btn_openBraces = (Button)findViewById(R.id.btn_sep_openBraces);
+        btn_openBraces.setOnClickListener(this);
+        Button btn_closeBraces = (Button)findViewById(R.id.btn_sep_closeBraces);
+        btn_closeBraces.setOnClickListener(this);
+        Button btn_comma = (Button)findViewById(R.id.btn_sep_comma);
+        btn_comma.setOnClickListener(this);
+
+        // Actions
+        Button btn_plus = (Button)findViewById(R.id.btn_result);
+        btn_plus.setOnClickListener(this);
         ImageButton btn_delete = (ImageButton)findViewById(R.id.btn_delete);
-        //btn_delete.setOnClickListener(new Button.OnClickListener() {
-        //    public void onClick(View v) {
-        //        RemoveLastInput();
-        //    }
-        //});
+        btn_delete.setOnClickListener(this);
     }
 
     // CLICK
     @Override
     public void onClick(View v) {
-        user_input_view.setText("1+1");
+        switch (v.getId()) {
+            case R.id.btn_num_0:
+                arithmetic = arithmetic.concat("0");
+                break;
+            case R.id.btn_num_1:
+                arithmetic = arithmetic.concat("1");
+                break;
+            case R.id.btn_num_2:
+                arithmetic = arithmetic.concat("2");
+                break;
+            case R.id.btn_num_3:
+                arithmetic = arithmetic.concat("3");
+                break;
+            case R.id.btn_num_4:
+                arithmetic = arithmetic.concat("4");
+                break;
+            case R.id.btn_num_5:
+                arithmetic = arithmetic.concat("5");
+                break;
+            case R.id.btn_num_6:
+                arithmetic = arithmetic.concat("6");
+                break;
+            case R.id.btn_num_7:
+                arithmetic = arithmetic.concat("7");
+                break;
+            case R.id.btn_num_8:
+                arithmetic = arithmetic.concat("8");
+                break;
+            case R.id.btn_num_9:
+                arithmetic = arithmetic.concat("9");
+                break;
+            case R.id.btn_op_plus:
+                arithmetic = arithmetic.concat("+");
+                break;
+            case R.id.btn_op_subtract:
+                arithmetic = arithmetic.concat("-");
+                break;
+            case R.id.btn_op_multiply:
+                arithmetic = arithmetic.concat("*");
+                break;
+            case R.id.btn_op_divide:
+                arithmetic = arithmetic.concat("/");
+                break;
+            case R.id.btn_sep_openBraces:
+                arithmetic = arithmetic.concat("(");
+                break;
+            case R.id.btn_sep_closeBraces:
+                arithmetic = arithmetic.concat(")");
+                break;
+            case R.id.btn_sep_comma:
+                arithmetic = arithmetic.concat(".");
+                break;
+            case R.id.btn_delete:
+                RemoveLastInput();
+                break;
+            case R.id.btn_result:
+                String result;
+                try {
+                   result = "" + js_engine.eval(arithmetic);
+                } catch (ScriptException e) {
+                   result = "Error";
+                }
+                result_output_view.setText(result);
+                break;
+        }
+
+        user_input_view.setText(arithmetic);
     }
 
     private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
@@ -160,18 +232,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //private Boolean LastInputIsOperator(){
-    //    if (calculus.endsWith("+") || calculus.endsWith("-") || calculus.endsWith("*") || calculus.endsWith("/")) {
-    //        return true;
-    //    } else {
-    //        return false;
-    //    }
-    //}
+    private Boolean LastInputIsOperator(){
+        if (arithmetic.endsWith("+") || arithmetic.endsWith("-") || arithmetic.endsWith("*") || arithmetic.endsWith("/")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    //private void RemoveLastInput() {
-    //    if (calculus.length() > 0) {
-    //        calculus = calculus.substring(0, calculus.length() - 1);
-    //    }
-    //    user_input_view.setText(calculus);
-    //}
+    private void RemoveLastInput() {
+        if (arithmetic.length() > 0) {
+            arithmetic = arithmetic.substring(0, arithmetic.length() - 1);
+        }
+        user_input_view.setText(arithmetic);
+    }
 }
