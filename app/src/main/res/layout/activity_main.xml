@@ -9,17 +9,19 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/NumPad"
+        android:id="@+id/Pad"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:elevation="0dp"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
-            android:id="@+id/NumPad_row_1"
+            android:id="@+id/Pad_row_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -30,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
             <Button
@@ -38,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
             <Button
@@ -46,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="!" />
 
             <Button
@@ -54,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
             <Button
@@ -62,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
             <Button
@@ -70,13 +72,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/NumPad_row_2"
+            android:id="@+id/Pad_row_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -87,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
             <Button
@@ -95,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
             <Button
@@ -103,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="(" />
 
             <Button
@@ -111,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text=")" />
 
             <Button
@@ -119,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="%" />
 
             <Button
@@ -127,13 +129,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/NumPad_row_3"
+            android:id="@+id/Pad_row_3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -144,7 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="1" />
 
             <Button
@@ -152,7 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="2" />
 
             <Button
@@ -160,7 +162,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="3" />
 
             <Button
@@ -168,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="+" />
 
             <Button
@@ -176,7 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="sin" />
 
             <Button
@@ -184,13 +186,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/NumPad_row_4"
+            android:id="@+id/Pad_row_4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -201,7 +203,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="4" />
 
             <Button
@@ -209,7 +211,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="5" />
 
             <Button
@@ -217,7 +219,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="6" />
 
             <Button
@@ -225,7 +227,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="−" />
 
             <Button
@@ -233,7 +235,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="cos" />
 
             <Button
@@ -241,13 +243,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/NumPad_row_5"
+            android:id="@+id/Pad_row_5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -258,7 +260,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="7" />
 
             <Button
@@ -266,7 +268,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="8" />
 
             <Button
@@ -274,7 +276,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="9" />
 
             <Button
@@ -282,7 +284,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="×" />
 
             <Button
@@ -290,7 +292,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="tan" />
 
             <Button
@@ -298,13 +300,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/NumPad_row_6"
+            android:id="@+id/Pad_row_6"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -312,7 +314,7 @@
 
             <ImageButton
                 android:id="@+id/btn_delete"
-                style="@style/NumPad_btn_red"
+                style="@style/Pad_btn_red"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/ic_baseline_backspace_white"
@@ -323,7 +325,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="0" />
 
             <Button
@@ -331,7 +333,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="." />
 
             <Button
@@ -339,7 +341,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="÷" />
 
             <Button
@@ -347,7 +349,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="log" />
 
             <Button
@@ -355,80 +357,73 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="@style/NumPad_btn"
+                style="@style/Pad_btn"
                 android:text="ln" />
 
         </LinearLayout>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/InputField"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:background="@color/colorBackground_light"
-        app:layout_constraintBottom_toTopOf="@id/ResultField"
+        android:elevation="8dp"
+        android:background="#FFFFFF"
+        android:alpha="1"
+        android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/Pad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/formula_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_Formula"
+                app:layout_constraintBottom_toBottomOf="@id/btn_result"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_result"/>
 
-        <TextView
-            android:id="@+id/arithmetic_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/btn_result"
+                style="@style/Result_btn"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:gravity="left"
+                android:paddingLeft="17dp"
+                android:text="="
+                android:elevation="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ResultField"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:background="@color/colorBackground_light"
-        app:layout_constraintBottom_toTopOf="@+id/NumPad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/btn_result"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="left"
-            style="@style/Result_btn"
-            android:text="="
-            android:paddingLeft="17dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/result_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_weight="1"
-            android:elevation="10dp"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/dimenResultButton_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:elevation="10dp"
+                android:layout_marginLeft="73dp"
+                android:textColor="#FFFFFF"
+                android:scrollHorizontally="true"
+                android:textSize="@dimen/textSize_ResultButton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btn_result" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <ImageView
         android:id="@+id/trackpad"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/NumPad"
-        app:layout_constraintEnd_toEndOf="@+id/NumPad"
-        app:layout_constraintStart_toStartOf="@+id/NumPad"
-        app:layout_constraintTop_toTopOf="@+id/NumPad" />
+        app:layout_constraintBottom_toBottomOf="@+id/Pad"
+        app:layout_constraintEnd_toEndOf="@+id/Pad"
+        app:layout_constraintStart_toStartOf="@+id/Pad"
+        app:layout_constraintTop_toTopOf="@+id/Pad" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textSize_Formula">20dp</dimen>
+    <dimen name="textSize_PadButton">20dp</dimen>
+    <dimen name="textSize_ResultButton">60dp</dimen>
+
+    <item name="pad_small" type="dimen" format="float">1</item>
+    <item name="pad_medium" type="dimen" format="float">1.2</item>
+    <item name="pad_large" type="dimen" format="float">1.49</item>
+</resources>

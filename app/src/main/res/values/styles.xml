@@ -7,29 +7,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="NumPad_btn">
-        <item name="android:layout_margin">3.5dp</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:background">@drawable/btn_rounded_md</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">@dimen/dimenNumPadButton_text</item>
-    </style>
 
-    <style name="NumPad_btn_red">
-        <item name="android:layout_margin">3.5dp</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:background">@drawable/btn_rounded_md_red</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">@dimen/dimenNumPadButton_text</item>
-    </style>
-
-    <style name="Result_btn">
-        <item name="android:layout_marginLeft">3.5dp</item>
-        <item name="android:layout_marginRight">3.5dp</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:background">@drawable/btn_rounded_lg</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">@dimen/dimenResultButton_text</item>
-    </style>
 
 </resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:ambientShadowAlpha">0.3</item>
+        <item name="android:spotShadowAlpha">0.3</item>
+    </style>
+
+    <style name="Pad_btn">
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@drawable/btn_rounded_md</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/textSize_PadButton</item>
+    </style>
+
+    <style name="Pad_btn_red">
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@drawable/btn_rounded_md_red</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/textSize_PadButton</item>
+    </style>
+
+    <style name="Result_btn">
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@drawable/btn_rounded_lg</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/textSize_ResultButton</item>
+    </style>
+</resources>
