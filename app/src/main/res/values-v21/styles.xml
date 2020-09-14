@@ -11,7 +11,7 @@
     </style>
 
     <style name="Pad_btn">
-        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_margin">3dp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:background">@drawable/btn_rounded_md</item>
         <item name="android:textAllCaps">false</item>
@@ -19,7 +19,7 @@
     </style>
 
     <style name="Pad_btn_red">
-        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_margin">3dp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:background">@drawable/btn_rounded_md_red</item>
         <item name="android:textAllCaps">false</item>
@@ -27,7 +27,7 @@
     </style>
 
     <style name="Result_btn">
-        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_margin">3dp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:background">@drawable/btn_rounded_lg</item>
         <item name="android:textAllCaps">false</item>

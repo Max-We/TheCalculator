@@ -1,6 +1,7 @@
 package com.example.thecalculator;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -9,6 +10,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
 public class PadLayout extends LinearLayout {
@@ -17,12 +19,12 @@ public class PadLayout extends LinearLayout {
     private boolean mIsScaling = false;
     private ScaleGestureDetector scaleGestureDetector;
 
-    public PadLayout(Context context) {
-        super(context);
-
+    public PadLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         pad = findViewById(R.id.Pad);
         scaleGestureDetector = new ScaleGestureDetector(context, new ScaleListener());
     }
+
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent motionEvent) {

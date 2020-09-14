@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="textSize_Formula">20dp</dimen>
+    <dimen name="textSize_Formula">35dp</dimen>
     <dimen name="textSize_PadButton">20dp</dimen>
     <dimen name="textSize_ResultButton">60dp</dimen>
 

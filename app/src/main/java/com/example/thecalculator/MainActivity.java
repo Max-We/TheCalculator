@@ -1,6 +1,8 @@
 package com.example.thecalculator;
 
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.view.MotionEventCompat;
 
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
@@ -49,28 +52,27 @@ public class MainActivity extends AppCompatActivity {
 
         // Layout
         container = (ConstraintLayout)findViewById(R.id.container);
-        pad = (LinearLayout)findViewById(R.id.Pad);
+        pad =  (LinearLayout)findViewById(R.id.Pad);
 
         // Launch with Pad zoomed in
-        setPadScaleFactor(1.49f);
+        //setPadScaleFactor(1.49f);
 
         ImageView trackpad = (ImageView) findViewById(R.id.trackpad);
         final GestureDetector onSingleTap = new GestureDetector(this, new SingleTapConfirm());
         final OnClickListener onClick_Pad = new PadOnClickListener();
-
         trackpad.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (true) {
-                    result_text.setText("tap");
-                    return false;
-                } else {
-                    scaleDetector.onTouchEvent(motionEvent);
-                    result_text.setText("gesture");
+                if(false) {
+                    Log.d("PadLayout", "Scaling");
                     return true;
+                } else {
+                    Log.d("PadLayout", "No Scale detected, returning false.");
+                    return false;
                 }
             }
         });
+
 
         // Numbers
         Button btn_num1 = (Button)findViewById(R.id.btn_num_1);
@@ -208,14 +210,12 @@ public class MainActivity extends AppCompatActivity {
             factor *= scaleGestureDetector.getScaleFactor();
             factor = Math.max(1, Math.min(factor, ResourcesCompat.getFloat(getResources(), R.dimen.pad_large)));
             setPadScaleFactor(factor);
-            formula_text.setText("ON SCALE");
 
             return true;
         }
 
         @Override
         public boolean onScaleBegin(ScaleGestureDetector scaleGestureDetector) {
-            formula_text.setText("BEGINN");
             return true;
         }
 

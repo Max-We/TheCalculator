@@ -8,4 +8,6 @@
 
     <color name="colorBackground_light">#FFFFFF</color>
     <color name="colorBackground_dark">#000000</color>
+
+    <color name="colorDarkSecondary">#B1B1B1</color>
 </resources>
