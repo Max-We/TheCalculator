@@ -11,25 +11,21 @@
     </style>
 
     <style name="Pad_btn">
-        <item name="android:layout_margin">3dp</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:background">@drawable/btn_rounded_md</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/textSize_PadButton</item>
     </style>
 
     <style name="Pad_btn_red">
-        <item name="android:layout_margin">3dp</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:background">@drawable/btn_rounded_md_red</item>
+        <item name="android:textColor">@color/colorRed</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/textSize_PadButton</item>
     </style>
 
     <style name="Result_btn">
-        <item name="android:layout_margin">3dp</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:background">@drawable/btn_rounded_lg</item>
+        <item name="android:background">@drawable/btn_rounded_md</item>
+        <item name="android:textColor">@color/colorVeryDark</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/textSize_ResultButton</item>
     </style>
