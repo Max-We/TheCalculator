@@ -198,12 +198,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                     result_text.setText(result);
 //                    btn_result.setElevation(0);
-                    btn_result.setPressed(true);
+                    btn_result.setEnabled(false);
                     return;
             }
 
 //            btn_result.setElevation(getResources().getDimension(R.dimen.btn_result_elevation));
-            btn_result.setPressed(false);
+            btn_result.setEnabled(true);
             formula_text.setText(formula);
         }
     }
