@@ -1,6 +1,9 @@
 package com.example.thecalculator;
 
+import android.animation.AnimatorInflater;
+import android.animation.StateListAnimator;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -14,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
@@ -31,11 +35,14 @@ public class MainActivity extends AppCompatActivity {
     TextView formula_text;
     TextView result_text;
 
+    Button btn_result;
+
     LinearLayout pad;
     ConstraintLayout container;
 
     String formula = "";
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,14 +104,14 @@ public class MainActivity extends AppCompatActivity {
         btn_num0.setOnClickListener(onClick_Pad);
 
         // Operators
-        Button btn_minus = (Button)findViewById(R.id.btn_op_plus);
+        Button btn_plus = (Button)findViewById(R.id.btn_op_plus);
+        btn_plus.setOnClickListener(onClick_Pad);
+        Button btn_minus = (Button)findViewById(R.id.btn_op_subtract);
         btn_minus.setOnClickListener(onClick_Pad);
         Button btn_multiply = (Button)findViewById(R.id.btn_op_subtract);
         btn_multiply.setOnClickListener(onClick_Pad);
         Button btn_divide = (Button)findViewById(R.id.btn_op_multiply);
         btn_divide.setOnClickListener(onClick_Pad);
-        Button btn_equals = (Button)findViewById(R.id.btn_op_divide);
-        btn_equals.setOnClickListener(onClick_Pad);
 
         // Serparators
         Button btn_openBraces = (Button)findViewById(R.id.btn_sep_openBraces);
@@ -115,13 +122,16 @@ public class MainActivity extends AppCompatActivity {
         btn_comma.setOnClickListener(onClick_Pad);
 
         // Actions
-        Button btn_plus = (Button)findViewById(R.id.btn_result);
-        btn_plus.setOnClickListener(onClick_Pad);
+        btn_result = (Button)findViewById(R.id.btn_result);
+        btn_result.setOnClickListener(onClick_Pad);
+        //btn_result.setStateListAnimator( AnimatorInflater.loadStateListAnimator(this, R.animator.btn_result_unelevate) );
         ImageButton btn_delete = (ImageButton)findViewById(R.id.btn_delete);
         btn_delete.setOnClickListener(onClick_Pad);
     }
 
     private class PadOnClickListener implements OnClickListener {
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
@@ -187,9 +197,13 @@ public class MainActivity extends AppCompatActivity {
                         result = "Error";
                     }
                     result_text.setText(result);
-                    break;
+//                    btn_result.setElevation(0);
+                    btn_result.setPressed(true);
+                    return;
             }
 
+//            btn_result.setElevation(getResources().getDimension(R.dimen.btn_result_elevation));
+            btn_result.setPressed(false);
             formula_text.setText(formula);
         }
     }

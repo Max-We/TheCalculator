@@ -8,5 +8,7 @@
     <item name="pad_medium" type="dimen" format="float">1.2</item>
     <item name="pad_large" type="dimen" format="float">1.49</item>
 
-    <dimen name="horizontalPadding">8dp</dimen>
+    <dimen name="horizontalPadding">12dp</dimen>
+
+    <dimen name="btn_result_elevation" type="dimen" format="dp">10dp</dimen>
 </resources>
