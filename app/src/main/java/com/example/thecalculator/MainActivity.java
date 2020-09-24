@@ -5,13 +5,20 @@ import android.animation.StateListAnimator;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.Selection;
+import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,6 +30,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.MotionEventCompat;
 
+import org.w3c.dom.Text;
+
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
@@ -32,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
     ScriptEngine js_engine;
 
-    TextView formula_text;
+    EditText formula_text;
     TextView result_text;
 
     Button btn_result;
 
-    LinearLayout pad;
+    Pad pad;
     ConstraintLayout container;
 
     String formula = "";
@@ -54,158 +63,29 @@ public class MainActivity extends AppCompatActivity {
         js_engine = mgr.getEngineByName("javascript");
 
         // Output
-        formula_text = (TextView)findViewById(R.id.formula_input);
-        result_text =  (TextView)findViewById(R.id.result_text);
+        formula_text = (EditText)findViewById(R.id.formula_input);
+        formula_text.setMovementMethod(new ScrollingMovementMethod());
+
+        formula_text.setRawInputType(InputType.TYPE_CLASS_TEXT);
+        formula_text.setTextIsSelectable(true);
+
+        // Connect pad to formula input
+        pad = (Pad) findViewById(R.id.Pad);
+        InputConnection ic = formula_text.onCreateInputConnection(new EditorInfo());
+        pad.setInputConnection(ic);
+
+        result_text = (TextView)findViewById(R.id.result_text);
+
 
         // Layout
-        container = (ConstraintLayout)findViewById(R.id.container);
-        pad =  (LinearLayout)findViewById(R.id.Pad);
 
         // Launch with Pad zoomed in
         //setPadScaleFactor(1.49f);
 
         ImageView trackpad = (ImageView) findViewById(R.id.trackpad);
         final GestureDetector onSingleTap = new GestureDetector(this, new SingleTapConfirm());
-        final OnClickListener onClick_Pad = new PadOnClickListener();
-        trackpad.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(false) {
-                    Log.d("PadLayout", "Scaling");
-                    return true;
-                } else {
-                    Log.d("PadLayout", "No Scale detected, returning false.");
-                    return false;
-                }
-            }
-        });
-
-
         // Numbers
-        Button btn_num1 = (Button)findViewById(R.id.btn_num_1);
-        btn_num1.setOnClickListener(onClick_Pad);
-        Button btn_num2 = (Button)findViewById(R.id.btn_num_2);
-        btn_num2.setOnClickListener(onClick_Pad);
-        Button btn_num3 = (Button)findViewById(R.id.btn_num_3);
-        btn_num3.setOnClickListener(onClick_Pad);
-        Button btn_num4 = (Button)findViewById(R.id.btn_num_4);
-        btn_num4.setOnClickListener(onClick_Pad);
-        Button btn_num5 = (Button)findViewById(R.id.btn_num_5);
-        btn_num5.setOnClickListener(onClick_Pad);
-        Button btn_num6 = (Button)findViewById(R.id.btn_num_6);
-        btn_num6.setOnClickListener(onClick_Pad);
-        Button btn_num7 = (Button)findViewById(R.id.btn_num_7);
-        btn_num7.setOnClickListener(onClick_Pad);
-        Button btn_num8 = (Button)findViewById(R.id.btn_num_8);
-        btn_num8.setOnClickListener(onClick_Pad);
-        Button btn_num9 = (Button)findViewById(R.id.btn_num_9);
-        btn_num9.setOnClickListener(onClick_Pad);
-        Button btn_num0 = findViewById(R.id.btn_num_0);
-        btn_num0.setOnClickListener(onClick_Pad);
 
-        // Operators
-        Button btn_plus = (Button)findViewById(R.id.btn_op_plus);
-        btn_plus.setOnClickListener(onClick_Pad);
-        Button btn_minus = (Button)findViewById(R.id.btn_op_subtract);
-        btn_minus.setOnClickListener(onClick_Pad);
-        Button btn_multiply = (Button)findViewById(R.id.btn_op_subtract);
-        btn_multiply.setOnClickListener(onClick_Pad);
-        Button btn_divide = (Button)findViewById(R.id.btn_op_multiply);
-        btn_divide.setOnClickListener(onClick_Pad);
-
-        // Serparators
-        Button btn_openBraces = (Button)findViewById(R.id.btn_sep_openBraces);
-        btn_openBraces.setOnClickListener(onClick_Pad);
-        Button btn_closeBraces = (Button)findViewById(R.id.btn_sep_closeBraces);
-        btn_closeBraces.setOnClickListener(onClick_Pad);
-        Button btn_comma = (Button)findViewById(R.id.btn_sep_comma);
-        btn_comma.setOnClickListener(onClick_Pad);
-
-        // Actions
-        btn_result = (Button)findViewById(R.id.btn_result);
-        btn_result.setOnClickListener(onClick_Pad);
-        //btn_result.setStateListAnimator( AnimatorInflater.loadStateListAnimator(this, R.animator.btn_result_unelevate) );
-        ImageButton btn_delete = (ImageButton)findViewById(R.id.btn_delete);
-        btn_delete.setOnClickListener(onClick_Pad);
-    }
-
-    private class PadOnClickListener implements OnClickListener {
-
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.btn_num_0:
-                    formula = formula.concat("0");
-                    break;
-                case R.id.btn_num_1:
-                    formula = formula.concat("1");
-                    break;
-                case R.id.btn_num_2:
-                    formula = formula.concat("2");
-                    break;
-                case R.id.btn_num_3:
-                    formula = formula.concat("3");
-                    break;
-                case R.id.btn_num_4:
-                    formula = formula.concat("4");
-                    break;
-                case R.id.btn_num_5:
-                    formula = formula.concat("5");
-                    break;
-                case R.id.btn_num_6:
-                    formula = formula.concat("6");
-                    break;
-                case R.id.btn_num_7:
-                    formula = formula.concat("7");
-                    break;
-                case R.id.btn_num_8:
-                    formula = formula.concat("8");
-                    break;
-                case R.id.btn_num_9:
-                    formula = formula.concat("9");
-                    break;
-                case R.id.btn_op_plus:
-                    formula = formula.concat("+");
-                    break;
-                case R.id.btn_op_subtract:
-                    formula = formula.concat("-");
-                    break;
-                case R.id.btn_op_multiply:
-                    formula = formula.concat("*");
-                    break;
-                case R.id.btn_op_divide:
-                    formula = formula.concat("/");
-                    break;
-                case R.id.btn_sep_openBraces:
-                    formula = formula.concat("(");
-                    break;
-                case R.id.btn_sep_closeBraces:
-                    formula = formula.concat(")");
-                    break;
-                case R.id.btn_sep_comma:
-                    formula = formula.concat(".");
-                    break;
-                case R.id.btn_delete:
-                    RemoveLastInput();
-                    break;
-                case R.id.btn_result:
-                    String result;
-                    try {
-                        result = "" + js_engine.eval(formula);
-                    } catch (ScriptException e) {
-                        result = "Error";
-                    }
-                    result_text.setText(result);
-//                    btn_result.setElevation(0);
-                    btn_result.setEnabled(false);
-                    return;
-            }
-
-//            btn_result.setElevation(getResources().getDimension(R.dimen.btn_result_elevation));
-            btn_result.setEnabled(true);
-            formula_text.setText(formula);
-        }
     }
 
     private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
@@ -263,9 +143,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void RemoveLastInput() {
+        int startIndex = formula_text.getSelectionStart();
         if (formula.length() > 0) {
-            formula = formula.substring(0, formula.length() - 1);
+            if (formula_text.getSelectionStart() != 0) {
+                formula = formula.substring(0, formula_text.getSelectionStart()-1) + formula.substring(formula_text.getSelectionStart()+1, formula.length());
+            } else {
+                formula = formula.substring(0, formula.length() - 1);
+            }
         }
+        Log.d("Cursor", "Index: " + startIndex);
         formula_text.setText(formula);
     }
 }
