@@ -6,14 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
-    <include
+    <com.example.thecalculator.Pad
         android:id="@+id/Pad"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        layout="@layout/pad">
-    </include>
+        app:layout_constraintDimensionRatio="1:1"/>
 
     <ImageView
         android:id="@+id/trackpad"

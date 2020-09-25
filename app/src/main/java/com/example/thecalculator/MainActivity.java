@@ -1,39 +1,28 @@
 package com.example.thecalculator;
 
-import android.animation.AnimatorInflater;
-import android.animation.StateListAnimator;
-import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.text.Selection;
-import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.core.view.MotionEventCompat;
 
-import org.w3c.dom.Text;
-
-import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,13 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
     ScriptEngine js_engine;
 
+    Pad pad;
+    Button btn_result;
     EditText formula_text;
     TextView result_text;
-
-    Button btn_result;
-
-    Pad pad;
-    ConstraintLayout container;
 
     String formula = "";
 
@@ -70,22 +56,30 @@ public class MainActivity extends AppCompatActivity {
         formula_text.setTextIsSelectable(true);
 
         // Connect pad to formula input
-        pad = (Pad) findViewById(R.id.Pad);
+        pad = (Pad)findViewById(R.id.Pad);
         InputConnection ic = formula_text.onCreateInputConnection(new EditorInfo());
         pad.setInputConnection(ic);
 
+        btn_result = (Button)findViewById(R.id.btn_result);
         result_text = (TextView)findViewById(R.id.result_text);
 
+        btn_result.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String result;
+                try {
+                    result = js_engine.eval(formula).toString();
+                } catch (ScriptException e) {
+                    result = "ERROR";
+                }
 
-        // Layout
-
-        // Launch with Pad zoomed in
-        //setPadScaleFactor(1.49f);
+                result_text.setText(result);
+//                btn_result.setEnabled(false);
+            }
+        });
 
         ImageView trackpad = (ImageView) findViewById(R.id.trackpad);
         final GestureDetector onSingleTap = new GestureDetector(this, new SingleTapConfirm());
-        // Numbers
-
     }
 
     private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {

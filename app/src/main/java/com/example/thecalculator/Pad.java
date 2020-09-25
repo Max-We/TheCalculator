@@ -31,8 +31,13 @@ public class Pad extends LinearLayout implements View.OnClickListener {
     public Pad(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
+    Button btn_result;
+
     private void init(Context context) {
         LayoutInflater.from(context).inflate(R.layout.pad, this, true);
+
+        btn_result = (Button)findViewById(R.id.btn_result);
 
         Button btn_num1 = (Button)findViewById(R.id.btn_num_1);
         btn_num1.setOnClickListener(this);
@@ -163,11 +168,9 @@ public class Pad extends LinearLayout implements View.OnClickListener {
                 break;
         }
 
-//            btn_result.setElevation(getResources().getDimension(R.dimen.btn_result_elevation));
+        btn_result.setEnabled(true);
     }
 
-    // The activity (or some parent or controller) must give us
-    // a reference to the current EditText's InputConnection
     public void setInputConnection(InputConnection ic) {
         this.inputConnection = ic;
     }
