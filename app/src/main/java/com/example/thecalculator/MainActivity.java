@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     EditText formula_text;
     TextView result_text;
 
-    String formula = "";
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,26 +53,29 @@ public class MainActivity extends AppCompatActivity {
         formula_text.setRawInputType(InputType.TYPE_CLASS_TEXT);
         formula_text.setTextIsSelectable(true);
 
+        btn_result = (Button)findViewById(R.id.btn_result);
+        result_text = (TextView)findViewById(R.id.result_text);
+
         // Connect pad to formula input
         pad = (Pad)findViewById(R.id.Pad);
         InputConnection ic = formula_text.onCreateInputConnection(new EditorInfo());
         pad.setInputConnection(ic);
+        pad.setBtn_result(btn_result);
 
-        btn_result = (Button)findViewById(R.id.btn_result);
-        result_text = (TextView)findViewById(R.id.result_text);
+
 
         btn_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String result;
                 try {
-                    result = js_engine.eval(formula).toString();
+                    result = js_engine.eval(formula_text.getText().toString()).toString();
                 } catch (ScriptException e) {
                     result = "ERROR";
                 }
 
                 result_text.setText(result);
-//                btn_result.setEnabled(false);
+                btn_result.setEnabled(false);
             }
         });
 
@@ -126,26 +127,5 @@ public class MainActivity extends AppCompatActivity {
         pad.setScaleY(factor);
         pad.setPivotX(0);
         pad.setPivotY(pad.getHeight());
-    }
-
-    private Boolean LastInputIsOperator(){
-        if (formula.endsWith("+") || formula.endsWith("-") || formula.endsWith("*") || formula.endsWith("/")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private void RemoveLastInput() {
-        int startIndex = formula_text.getSelectionStart();
-        if (formula.length() > 0) {
-            if (formula_text.getSelectionStart() != 0) {
-                formula = formula.substring(0, formula_text.getSelectionStart()-1) + formula.substring(formula_text.getSelectionStart()+1, formula.length());
-            } else {
-                formula = formula.substring(0, formula.length() - 1);
-            }
-        }
-        Log.d("Cursor", "Index: " + startIndex);
-        formula_text.setText(formula);
     }
 }

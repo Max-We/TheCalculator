@@ -1,5 +1,6 @@
 package com.example.thecalculator;
 
+import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,26 +19,29 @@ import androidx.annotation.RequiresApi;
 public class Pad extends LinearLayout implements View.OnClickListener {
     InputConnection inputConnection;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public Pad(Context context) {
         super(context);
-        init(context);
+        init(context, null);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public Pad(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        init(context, attrs);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public Pad(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context, attrs);
     }
 
     Button btn_result;
 
-    private void init(Context context) {
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void init(Context context, @Nullable AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.pad, this, true);
-
-        btn_result = (Button)findViewById(R.id.btn_result);
 
         Button btn_num1 = (Button)findViewById(R.id.btn_num_1);
         btn_num1.setOnClickListener(this);
@@ -79,7 +83,6 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         btn_comma.setOnClickListener(this);
 
         // Actions
-        //btn_result.setStateListAnimator( AnimatorInflater.loadStateListAnimator(this, R.animator.btn_result_unelevate) );
         ImageButton btn_delete = (ImageButton)findViewById(R.id.btn_delete);
         btn_delete.setOnClickListener(this);
     }
@@ -174,4 +177,6 @@ public class Pad extends LinearLayout implements View.OnClickListener {
     public void setInputConnection(InputConnection ic) {
         this.inputConnection = ic;
     }
+
+    public void setBtn_result(Button btn_result_reference) { this.btn_result = btn_result_reference; }
 }
