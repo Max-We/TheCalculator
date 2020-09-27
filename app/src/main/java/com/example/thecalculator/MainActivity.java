@@ -22,6 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -73,7 +78,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String result;
                 try {
-                    result = js_engine.eval(formula_text.getText().toString()).toString();
+                    BigDecimal c = new BigDecimal(js_engine.eval(formula_text.getText().toString()).toString()).setScale(2, RoundingMode.DOWN);
+                    NumberFormat formatter = new DecimalFormat("0.####E0");
+                    if (c.toString().length() > 10) {
+                        result = formatter.format(c.longValue()) + "";
+                    } else {
+                        result = c.longValue() + "";
+                    }
                 } catch (ScriptException e) {
                     result = "ERROR";
                 }
