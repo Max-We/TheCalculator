@@ -4,9 +4,11 @@ import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
@@ -38,6 +40,7 @@ public class Pad extends LinearLayout implements View.OnClickListener {
     }
 
     Button btn_result;
+    private Handler handler = new Handler();
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void init(Context context, @Nullable AttributeSet attrs) {
@@ -84,7 +87,7 @@ public class Pad extends LinearLayout implements View.OnClickListener {
 
         // Actions
         ImageButton btn_delete = (ImageButton)findViewById(R.id.btn_delete);
-        btn_delete.setOnClickListener(this);
+        btn_delete.setOnTouchListener(new HandleRemove());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -161,18 +164,85 @@ public class Pad extends LinearLayout implements View.OnClickListener {
                 inputConnection.commitText(".", 1);
                 //formula = formula.concat(".");
                 break;
-            case R.id.btn_delete:
-                CharSequence selectedText = inputConnection.getSelectedText(0);
-                if (TextUtils.isEmpty(selectedText)) {
-                    inputConnection.deleteSurroundingText(1, 0);
-                } else {
-                    inputConnection.commitText("", 1);
-                }
-                break;
         }
 
         btn_result.setEnabled(true);
     }
+
+    private class HandleRemove implements OnTouchListener {
+        boolean deleteThreadRunning = false;
+        boolean cancelDeleteThread = false;
+
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+
+            switch (motionEvent.getAction())
+            {
+                case MotionEvent.ACTION_DOWN:
+                {
+                    startDeleteThread();
+                    return true;
+                }
+
+                case MotionEvent.ACTION_UP:
+                {
+                    stopDeleteThread();
+                }
+
+                default:
+                    return false;
+            }
+        }
+
+        private void startDeleteThread() {
+            CharSequence selectedText = inputConnection.getSelectedText(0);
+            if (TextUtils.isEmpty(selectedText)) {
+                inputConnection.deleteSurroundingText(1, 0);
+            } else {
+                inputConnection.commitText("", 1);
+            }
+
+            Thread t = new Thread() {
+                @Override
+                public void run(){
+                    try {
+                        deleteThreadRunning = true;
+                        while(!cancelDeleteThread){
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    CharSequence selectedText = inputConnection.getSelectedText(0);
+                                    if (TextUtils.isEmpty(selectedText)) {
+                                        inputConnection.deleteSurroundingText(1, 0);
+                                    } else {
+                                        inputConnection.commitText("", 1);
+                                    }
+                                }
+                            });
+
+                            try {
+                                Thread.sleep(150);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(
+                                        "Could not wait between char delete.", e);
+                            };
+                        }
+                    } finally {
+                        deleteThreadRunning = false;
+                        cancelDeleteThread = false;
+                    }
+                }
+            };
+
+            t.start();
+        }
+
+        private void stopDeleteThread() {
+            cancelDeleteThread = true;
+        }
+    }
+
+
 
     public void setInputConnection(InputConnection ic) {
         this.inputConnection = ic;

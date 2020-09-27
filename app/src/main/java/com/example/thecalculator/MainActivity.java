@@ -78,12 +78,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String result;
                 try {
-                    BigDecimal c = new BigDecimal(js_engine.eval(formula_text.getText().toString()).toString()).setScale(2, RoundingMode.DOWN);
-                    NumberFormat formatter = new DecimalFormat("0.####E0");
-                    if (c.toString().length() > 10) {
-                        result = formatter.format(c.longValue()) + "";
+                    if (formula_text.getText().length() > 0) {
+                        BigDecimal c = new BigDecimal(js_engine.eval(formula_text.getText().toString()).toString()).setScale(2, RoundingMode.DOWN);
+                        NumberFormat formatter = new DecimalFormat("0.####E0");
+                        if (c.toString().length() > 10) {
+                            result = formatter.format(c.longValue()) + "";
+                        } else {
+                            result = c.longValue() + "";
+                        }
                     } else {
-                        result = c.longValue() + "";
+                        result = "";
                     }
                 } catch (ScriptException e) {
                     result = "ERROR";
