@@ -195,16 +195,11 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         }
 
         private void startDeleteThread() {
-            CharSequence selectedText = inputConnection.getSelectedText(0);
-            if (TextUtils.isEmpty(selectedText)) {
-                inputConnection.deleteSurroundingText(1, 0);
-            } else {
-                inputConnection.commitText("", 1);
-            }
-
             Thread t = new Thread() {
                 @Override
                 public void run(){
+                    boolean initialWaitOver = false;
+
                     try {
                         deleteThreadRunning = true;
                         while(!cancelDeleteThread){
@@ -221,7 +216,12 @@ public class Pad extends LinearLayout implements View.OnClickListener {
                             });
 
                             try {
-                                Thread.sleep(150);
+                                if (!initialWaitOver) {
+                                    Thread.sleep(250);
+                                    initialWaitOver = true;
+                                } else {
+                                    Thread.sleep(100);
+                                }
                             } catch (InterruptedException e) {
                                 throw new RuntimeException(
                                         "Could not wait between char delete.", e);
