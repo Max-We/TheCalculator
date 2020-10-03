@@ -87,13 +87,22 @@ public class MainActivity extends AppCompatActivity {
                     if (formula_text.getText().length() > 0) {
 //                        BigDecimal c = new BigDecimal(js_engine.eval(formula_text.getText().toString()).toString()).setScale(2, RoundingMode.DOWN);
                         Log.i("String to Calculate", formula_text.getText().toString());
-                        BigDecimal c = new BigDecimal(arity.eval(formatExpression(formula_text.getText().toString()))).setScale(2, RoundingMode.DOWN);
-                        NumberFormat formatter = new DecimalFormat("0.####E0");
-                        if (c.toString().length() > 10) {
-                            result = formatter.format(c.longValue()) + "";
-                        } else {
-                            result = c.longValue() + "";
+                        Double c = arity.eval(formatExpression(formula_text.getText().toString()));
+                        if(c.isNaN()) {
+                            c = 0d;
                         }
+
+                        NumberFormat formatter = new DecimalFormat("0.#####E0");
+                        if (!c.isInfinite()) {
+                            if (c.toString().length() > 10) {
+                                result = formatter.format(c) + "";
+                            } else {
+                                result = c + "";
+                            }
+                        } else {
+                            result = "u\221E";
+                        }
+
                     } else {
                         result = "";
                     }
@@ -150,9 +159,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String formatExpression(String expression) {
-        // Power
-        expression = expression.replace(getResources().getString(R.string.power_of_2), "^2");
-
         // Cube Root
         expression = expression.replace(getResources().getString(R.string.root_cube), "cbrt");
 
@@ -163,6 +169,11 @@ public class MainActivity extends AppCompatActivity {
         expression = expression.replace(getResources().getString(R.string.sin_inverse), "asin");
         expression = expression.replace(getResources().getString(R.string.cos_inverse), "acos");
         expression = expression.replace(getResources().getString(R.string.tan_inverse), "atan");
+
+        // Power
+        expression = expression.replace(getResources().getString(R.string.power_of_2), "^2");
+        expression = expression.replace(getResources().getString(R.string.power_of_3), "^3");
+        expression = expression.replace(getResources().getString(R.string.power_of_inverse), "^-1");
 
         return expression;
     }

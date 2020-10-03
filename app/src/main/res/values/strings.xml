@@ -11,6 +11,8 @@
 
 <!--Root & Square-->
     <string name="power_of_2">\u00B2</string>
+    <string name="power_of_3">\u00B3</string>
+    <string name="power_of_inverse">\u207B\u00B9</string>
     <string name="root_square">\u221a</string>
     <string name="root_cube">\u221B</string>
 
@@ -33,6 +35,8 @@
 
 <!--Keyboard signs-->
     <string name="x_power_of_2">x\u00B2</string>
+    <string name="x_power_of_3">x\u00B3</string>
+    <string name="x_power_of_inverse">x\u207B\u00B9</string>
     <string name="x_root_square">\u221a\x</string>
     <string name="x_root_cube">\u221B\x</string>
 </resources>

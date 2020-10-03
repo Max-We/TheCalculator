@@ -83,12 +83,14 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         btn_cube_root.setOnClickListener(this);
         Button btn_square = (Button)findViewById(R.id.btn_op_square);
         btn_square.setOnClickListener(this);
+        Button btn_cube = (Button)findViewById(R.id.btn_op_cube);
+        btn_cube.setOnClickListener(this);
+        Button btn_power_inverse = (Button)findViewById(R.id.btn_op_power_inverse);
+        btn_power_inverse.setOnClickListener(this);
         Button btn_permille = (Button)findViewById(R.id.btn_op_permille);
         btn_permille.setOnClickListener(this);
         Button btn_percent = (Button)findViewById(R.id.btn_op_percent);
         btn_percent.setOnClickListener(this);
-        Button btn_period = (Button)findViewById(R.id.btn_op_period);
-        btn_period.setOnClickListener(this);
 
         // Serparators
         Button btn_openBraces = (Button)findViewById(R.id.btn_sep_openBraces);
@@ -194,6 +196,12 @@ public class Pad extends LinearLayout implements View.OnClickListener {
                 break;
             case R.id.btn_op_square:
                 inputConnection.commitText(getResources().getString(R.string.power_of_2), 1);
+                break;
+            case R.id.btn_op_cube:
+                inputConnection.commitText(getResources().getString(R.string.power_of_3), 1);
+                break;
+            case R.id.btn_op_power_inverse:
+                inputConnection.commitText(getResources().getString(R.string.power_of_inverse), 1);
                 break;
             case R.id.btn_fun_factorial:
                 inputConnection.commitText("!", 1);

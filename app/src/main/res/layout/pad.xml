@@ -22,12 +22,20 @@
                 android:text="@string/x_root_cube" />
 
             <Button
-                android:id="@+id/btn_2_row_1"
+                android:id="@+id/btn_op_cube"
                 style="@style/Pad_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="0" />
+                android:text="@string/x_power_of_3" />
+
+            <Button
+                android:id="@+id/btn_op_power_inverse"
+                style="@style/Pad_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/x_power_of_inverse" />
 
             <Button
                 android:id="@+id/btn_fun_factorial"
@@ -36,14 +44,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="!" />
-
-            <Button
-                android:id="@+id/btn_op_period"
-                style="@style/Pad_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/period" />
 
             <Button
                 android:id="@+id/btn_op_permille"
