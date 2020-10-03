@@ -289,8 +289,13 @@ public class Pad extends LinearLayout implements View.OnClickListener {
                                                 beforeCursor = inputConnection.getTextBeforeCursor(3, 0).toString();
                                                 if (beforeCursor.contains("ln(")) {
                                                     inputConnection.deleteSurroundingText(3, 0);
-                                                } else {
-                                                    inputConnection.deleteSurroundingText(1, 0);
+                                                }  else {
+                                                    beforeCursor = inputConnection.getTextBeforeCursor(2, 0).toString();
+                                                    if (beforeCursor.contains(getResources().getString(R.string.root_square) + "(") || beforeCursor.contains(getResources().getString(R.string.root_cube) + "(")) {
+                                                        inputConnection.deleteSurroundingText(2, 0);
+                                                    } else {
+                                                        inputConnection.deleteSurroundingText(1, 0);
+                                                    }
                                                 }
                                             }
                                         }
