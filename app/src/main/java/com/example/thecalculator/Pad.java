@@ -72,7 +72,7 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         btn_plus.setOnClickListener(this);
         Button btn_minus = (Button)findViewById(R.id.btn_op_subtract);
         btn_minus.setOnClickListener(this);
-        Button btn_multiply = (Button)findViewById(R.id.btn_op_subtract);
+        Button btn_multiply = (Button)findViewById(R.id.btn_op_multiply);
         btn_multiply.setOnClickListener(this);
         Button btn_divide = (Button)findViewById(R.id.btn_op_divide);
         btn_divide.setOnClickListener(this);
@@ -97,7 +97,7 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         btn_closeBraces.setOnClickListener(this);
         Button btn_comma = (Button)findViewById(R.id.btn_sep_comma);
         btn_comma.setOnClickListener(this);
-        
+
         // Functions
         Button btn_factorial = (Button)findViewById(R.id.btn_fun_factorial);
         btn_factorial.setOnClickListener(this);
@@ -278,7 +278,22 @@ public class Pad extends LinearLayout implements View.OnClickListener {
                                 public void run() {
                                     CharSequence selectedText = inputConnection.getSelectedText(0);
                                     if (TextUtils.isEmpty(selectedText)) {
-                                        inputConnection.deleteSurroundingText(1, 0);
+                                        String beforeCursor = inputConnection.getTextBeforeCursor(6, 0).toString();
+                                        if (beforeCursor.contains(getResources().getString(R.string.sin_inverse) + "(") || beforeCursor.contains(getResources().getString(R.string.cos_inverse) + "(") || beforeCursor.contains(getResources().getString(R.string.tan_inverse) + "(")) {
+                                            inputConnection.deleteSurroundingText(6, 0);
+                                        } else {
+                                            beforeCursor = inputConnection.getTextBeforeCursor(4, 0).toString();
+                                            if (beforeCursor.contains("sin(") || beforeCursor.contains("cos(") || beforeCursor.contains("tan(") || beforeCursor.contains("log(")) {
+                                                inputConnection.deleteSurroundingText(4, 0);
+                                            } else {
+                                                beforeCursor = inputConnection.getTextBeforeCursor(3, 0).toString();
+                                                if (beforeCursor.contains("ln(")) {
+                                                    inputConnection.deleteSurroundingText(3, 0);
+                                                } else {
+                                                    inputConnection.deleteSurroundingText(1, 0);
+                                                }
+                                            }
+                                        }
                                     } else {
                                         inputConnection.commitText("", 1);
                                     }
