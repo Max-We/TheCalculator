@@ -1,3 +1,38 @@
 <resources>
+<!--App-->
     <string name="app_name">The Calculator</string>
+
+<!--Operators-->
+    <string name="plus">+</string>
+    <string name="minus">\u2212</string>
+    <string name="divide">\u00f7</string>
+    <string name="multiply">\u00d7</string>
+    <string name="period">\u203E</string>
+
+<!--Root & Square-->
+    <string name="power_of_2">\u00B2</string>
+    <string name="root_square">\u221a</string>
+    <string name="root_cube">\u221B</string>
+
+<!--Functions-->
+    <string name="cos">cos</string>
+    <string name="cos_inverse">cos\u207B\u00B9</string>
+    <string name="sin">sin</string>
+    <string name="sin_inverse">sin\u207B\u00B9</string>
+    <string name="tan">tan</string>
+    <string name="tan_inverse">tan\u207B\u00B9</string>
+    <string name="log">log</string>
+    <string name="ln">ln</string>
+
+    <string name="percent">%</string>
+    <string name="permille">\u2030</string>
+
+<!--Constants-->
+    <string name="pi">\u03C0</string>
+    <string name="eulers">e</string>
+
+<!--Keyboard signs-->
+    <string name="x_power_of_2">x\u00B2</string>
+    <string name="x_root_square">\u221a\x</string>
+    <string name="x_root_cube">\u221B\x</string>
 </resources>

@@ -14,12 +14,12 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/btn_1_row_1"
+                android:id="@+id/btn_op_cube_root"
                 style="@style/Pad_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="0" />
+                android:text="@string/x_root_cube" />
 
             <Button
                 android:id="@+id/btn_2_row_1"
@@ -38,28 +38,28 @@
                 android:text="!" />
 
             <Button
-                android:id="@+id/btn_4_row_1"
+                android:id="@+id/btn_op_period"
                 style="@style/Pad_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="0" />
+                android:text="@string/period" />
 
             <Button
-                android:id="@+id/btn_5_row_1"
+                android:id="@+id/btn_op_permille"
                 style="@style/Pad_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="0" />
+                android:text="@string/permille" />
 
             <Button
-                android:id="@+id/btn_6_row_1"
+                android:id="@+id/btn_const_eulers"
                 style="@style/Pad_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="0" />
+                android:text="e" />
 
         </LinearLayout>
 
@@ -70,20 +70,20 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/btn_1_row_2"
+                android:id="@+id/btn_op_square_root"
                 style="@style/Pad_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="0" />
+                android:text="@string/x_root_square" />
 
             <Button
-                android:id="@+id/btn_2_row_2"
+                android:id="@+id/btn_op_square"
                 style="@style/Pad_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="0" />
+                android:text="@string/x_power_of_2" />
 
             <Button
                 android:id="@+id/btn_sep_openBraces"
@@ -107,15 +107,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="%" />
+                android:text="@string/percent" />
 
             <Button
-                android:id="@+id/btn_6_row_2"
+                android:id="@+id/btn_const_pi"
                 style="@style/Pad_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="0" />
+                android:text="@string/pi" />
 
         </LinearLayout>
 
@@ -155,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="+" />
+                android:text="@string/plus" />
 
             <Button
                 android:id="@+id/btn_fun_sin"
@@ -163,15 +163,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="sin" />
+                android:text="@string/sin" />
 
             <Button
-                android:id="@+id/btn_6_row_3"
+                android:id="@+id/btn_fun_sin_inverse"
                 style="@style/Pad_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="0" />
+                android:text="@string/sin_inverse" />
 
         </LinearLayout>
 
@@ -211,7 +211,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="−" />
+                android:text="@string/minus" />
 
             <Button
                 android:id="@+id/btn_fun_cos"
@@ -219,15 +219,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="cos" />
+                android:text="@string/cos" />
 
             <Button
-                android:id="@+id/btn_6_row_4"
+                android:id="@+id/btn_fun_cos_inverse"
                 style="@style/Pad_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="0" />
+                android:text="@string/cos_inverse" />
 
         </LinearLayout>
 
@@ -267,7 +267,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="×" />
+                android:text="@string/multiply" />
 
             <Button
                 android:id="@+id/btn_fun_tan"
@@ -275,15 +275,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="tan" />
+                android:text="@string/tan" />
 
             <Button
-                android:id="@+id/btn_6_row_5"
+                android:id="@+id/btn_fun_tan_inverse"
                 style="@style/Pad_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="0" />
+                android:text="@string/tan_inverse" />
 
         </LinearLayout>
 
@@ -325,7 +325,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="÷" />
+                android:text="@string/divide" />
 
             <Button
                 android:id="@+id/btn_fun_log"
@@ -333,7 +333,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="log" />
+                android:text="@string/log" />
 
             <Button
                 android:id="@+id/btn_fun_ln"

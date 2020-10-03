@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.math.BigDecimal;
@@ -31,10 +30,16 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import org.javia.arity.Symbols;
+import org.javia.arity.SyntaxException;
+import org.javia.arity.Util;
+
 public class MainActivity extends AppCompatActivity {
     ScaleGestureDetector scaleDetector;
 
     ScriptEngine js_engine;
+    Symbols arity;
+
 
     Pad pad;
     Button btn_result;
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         ScriptEngineManager mgr = new ScriptEngineManager();
         js_engine = mgr.getEngineByName("javascript");
+        arity = new Symbols();
 
         // Output
         formula_text = (EditText)findViewById(R.id.formula_input);
@@ -79,7 +85,9 @@ public class MainActivity extends AppCompatActivity {
                 String result;
                 try {
                     if (formula_text.getText().length() > 0) {
-                        BigDecimal c = new BigDecimal(js_engine.eval(formula_text.getText().toString()).toString()).setScale(2, RoundingMode.DOWN);
+//                        BigDecimal c = new BigDecimal(js_engine.eval(formula_text.getText().toString()).toString()).setScale(2, RoundingMode.DOWN);
+                        Log.i("String to Calculate", formula_text.getText().toString());
+                        BigDecimal c = new BigDecimal(arity.eval(formatExpression(formula_text.getText().toString()))).setScale(2, RoundingMode.DOWN);
                         NumberFormat formatter = new DecimalFormat("0.####E0");
                         if (c.toString().length() > 10) {
                             result = formatter.format(c.longValue()) + "";
@@ -89,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         result = "";
                     }
-                } catch (ScriptException e) {
+                } catch (SyntaxException e) {
                     result = "ERROR";
                 }
 
@@ -139,6 +147,18 @@ public class MainActivity extends AppCompatActivity {
 
             setPadScaleFactor(factor);
         }
+    }
+
+    private String formatExpression(String expression) {
+        // Power
+        expression = expression.replace(getResources().getString(R.string.power_of_2), "^2");
+
+        // Cube Root
+        expression = expression.replace(getResources().getString(R.string.root_cube), "cbrt");
+
+        // Permille
+        expression = expression.replace(getResources().getString(R.string.permille), "*0.001");
+        return expression;
     }
 
     private void setPadScaleFactor(float factor) {

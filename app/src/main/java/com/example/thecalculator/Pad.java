@@ -74,8 +74,21 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         btn_minus.setOnClickListener(this);
         Button btn_multiply = (Button)findViewById(R.id.btn_op_subtract);
         btn_multiply.setOnClickListener(this);
-        Button btn_divide = (Button)findViewById(R.id.btn_op_multiply);
+        Button btn_divide = (Button)findViewById(R.id.btn_op_divide);
         btn_divide.setOnClickListener(this);
+
+        Button btn_root = (Button)findViewById(R.id.btn_op_square_root);
+        btn_root.setOnClickListener(this);
+        Button btn_cube_root = (Button)findViewById(R.id.btn_op_cube_root);
+        btn_cube_root.setOnClickListener(this);
+        Button btn_square = (Button)findViewById(R.id.btn_op_square);
+        btn_square.setOnClickListener(this);
+        Button btn_permille = (Button)findViewById(R.id.btn_op_permille);
+        btn_permille.setOnClickListener(this);
+        Button btn_percent = (Button)findViewById(R.id.btn_op_percent);
+        btn_percent.setOnClickListener(this);
+        Button btn_period = (Button)findViewById(R.id.btn_op_period);
+        btn_period.setOnClickListener(this);
 
         // Serparators
         Button btn_openBraces = (Button)findViewById(R.id.btn_sep_openBraces);
@@ -84,6 +97,32 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         btn_closeBraces.setOnClickListener(this);
         Button btn_comma = (Button)findViewById(R.id.btn_sep_comma);
         btn_comma.setOnClickListener(this);
+        
+        // Functions
+        Button btn_factorial = (Button)findViewById(R.id.btn_fun_factorial);
+        btn_factorial.setOnClickListener(this);
+        Button btn_sin = (Button)findViewById(R.id.btn_fun_sin);
+        btn_sin.setOnClickListener(this);
+        Button btn_sin_inverse = (Button)findViewById(R.id.btn_fun_sin_inverse);
+        btn_sin_inverse.setOnClickListener(this);
+        Button btn_cos = (Button)findViewById(R.id.btn_fun_cos);
+        btn_cos.setOnClickListener(this);
+        Button btn_cos_inverse = (Button)findViewById(R.id.btn_fun_cos_inverse);
+        btn_cos_inverse.setOnClickListener(this);
+        Button btn_tan = (Button)findViewById(R.id.btn_fun_tan);
+        btn_tan.setOnClickListener(this);
+        Button btn_tan_inverse = (Button)findViewById(R.id.btn_fun_tan_inverse);
+        btn_tan_inverse.setOnClickListener(this);
+        Button btn_log = (Button)findViewById(R.id.btn_fun_log);
+        btn_log.setOnClickListener(this);
+        Button btn_ln = (Button)findViewById(R.id.btn_fun_ln);
+        btn_ln.setOnClickListener(this);
+
+        // Constants
+        Button btn_eulers = (Button)findViewById(R.id.btn_const_eulers);
+        btn_eulers.setOnClickListener(this);
+        Button btn_pi = (Button)findViewById(R.id.btn_const_pi);
+        btn_pi.setOnClickListener(this);
 
         // Actions
         ImageButton btn_delete = (ImageButton)findViewById(R.id.btn_delete);
@@ -96,73 +135,104 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         if (inputConnection == null) return;
 
         switch (v.getId()) {
+            case R.id.btn_op_divide:
+                inputConnection.commitText(getResources().getString(R.string.divide), 1);
+                break;
             case R.id.btn_num_0:
                 inputConnection.commitText("0", 1);
-//                    formula = formula.concat("0");
                 break;
             case R.id.btn_num_1:
                 inputConnection.commitText("1", 1);
-//                    formula = formula.concat("1");
                 break;
             case R.id.btn_num_2:
                 inputConnection.commitText("2", 1);
-//                    formula = formula.concat("2");
                 break;
             case R.id.btn_num_3:
                 inputConnection.commitText("3", 1);
-//                    formula = formula.concat("3");
                 break;
             case R.id.btn_num_4:
                 inputConnection.commitText("4", 1);
-//                    formula = formula.concat("4");
                 break;
             case R.id.btn_num_5:
                 inputConnection.commitText("5", 1);
-//                    formula = formula.concat("5");
                 break;
             case R.id.btn_num_6:
                 inputConnection.commitText("6", 1);
-//                    formula = formula.concat("6");
                 break;
             case R.id.btn_num_7:
                 inputConnection.commitText("7", 1);
-                //formula = formula.concat("7");
                 break;
             case R.id.btn_num_8:
                 inputConnection.commitText("8", 1);
-                //formula = formula.concat("8");
                 break;
             case R.id.btn_num_9:
                 inputConnection.commitText("9", 1);
-                //formula = formula.concat("9");
                 break;
             case R.id.btn_op_plus:
                 inputConnection.commitText("+", 1);
-                //formula = formula.concat("+");
                 break;
             case R.id.btn_op_subtract:
-                inputConnection.commitText("-", 1);
-                //formula = formula.concat("-");
+                inputConnection.commitText(getResources().getString(R.string.minus), 1);
                 break;
             case R.id.btn_op_multiply:
-                inputConnection.commitText("*", 1);
-                //formula = formula.concat("*");
-                break;
-            case R.id.btn_op_divide:
-                inputConnection.commitText("/", 1);
-                //formula = formula.concat("/");
+                inputConnection.commitText(getResources().getString(R.string.multiply), 1);
                 break;
             case R.id.btn_sep_openBraces:
                 inputConnection.commitText("(", 1);
-                //formula = formula.concat("(");
                 break;
             case R.id.btn_sep_closeBraces:
                 inputConnection.commitText(")", 1);
-                //formula = formula.concat(")");
                 break;
             case R.id.btn_sep_comma:
                 inputConnection.commitText(".", 1);
-                //formula = formula.concat(".");
+                break;
+            case R.id.btn_op_square_root:
+                inputConnection.commitText(getResources().getString(R.string.root_square) + "(", 1);
+                break;
+            case R.id.btn_op_cube_root:
+                inputConnection.commitText(getResources().getString(R.string.root_cube) + "(", 1);
+                break;
+            case R.id.btn_op_square:
+                inputConnection.commitText(getResources().getString(R.string.power_of_2), 1);
+                break;
+            case R.id.btn_fun_factorial:
+                inputConnection.commitText("!", 1);
+                break;
+            case R.id.btn_op_percent:
+                inputConnection.commitText("%", 1);
+                break;
+            case R.id.btn_op_permille:
+                inputConnection.commitText(getResources().getString(R.string.permille), 1);
+                break;
+            case R.id.btn_const_eulers:
+                inputConnection.commitText("e", 1);
+                break;
+            case R.id.btn_const_pi:
+                inputConnection.commitText(getResources().getString(R.string.pi), 1);
+                break;
+            case R.id.btn_fun_sin:
+                inputConnection.commitText("sin(", 1);
+                break;
+            case R.id.btn_fun_sin_inverse:
+                inputConnection.commitText(getResources().getString(R.string.sin_inverse) + "(", 1);
+                break;
+            case R.id.btn_fun_cos:
+                inputConnection.commitText("cos(", 1);
+                break;
+            case R.id.btn_fun_cos_inverse:
+                inputConnection.commitText(getResources().getString(R.string.cos_inverse) + "(", 1);
+                break;
+            case R.id.btn_fun_tan:
+                inputConnection.commitText("tan(", 1);
+                break;
+            case R.id.btn_fun_tan_inverse:
+                inputConnection.commitText(getResources().getString(R.string.tan_inverse) + "(", 1);
+                break;
+            case R.id.btn_fun_log:
+                inputConnection.commitText("log(", 1);
+                break;
+            case R.id.btn_fun_ln:
+                inputConnection.commitText("ln(", 1);
                 break;
         }
 
@@ -212,6 +282,7 @@ public class Pad extends LinearLayout implements View.OnClickListener {
                                     } else {
                                         inputConnection.commitText("", 1);
                                     }
+                                    btn_result.setEnabled(true);
                                 }
                             });
 
