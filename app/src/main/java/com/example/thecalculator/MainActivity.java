@@ -158,6 +158,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Permille
         expression = expression.replace(getResources().getString(R.string.permille), "*0.001");
+
+        // Inverse sin, cos, tan
+        expression = expression.replace(getResources().getString(R.string.sin_inverse), "asin");
+        expression = expression.replace(getResources().getString(R.string.cos_inverse), "acos");
+        expression = expression.replace(getResources().getString(R.string.tan_inverse), "atan");
+
         return expression;
     }
 
