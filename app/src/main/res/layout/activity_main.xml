@@ -13,16 +13,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"/>
 
-    <ImageView
-        android:id="@+id/trackpad"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/Pad"
-        app:layout_constraintEnd_toEndOf="@+id/Pad"
-        app:layout_constraintStart_toStartOf="@+id/Pad"
-        app:layout_constraintTop_toTopOf="@+id/Pad" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

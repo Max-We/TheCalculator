@@ -1,14 +1,15 @@
 package com.example.thecalculator;
 
-import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
@@ -17,9 +18,9 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.res.ResourcesCompat;
 
 public class Pad extends LinearLayout implements View.OnClickListener {
-    InputConnection inputConnection;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public Pad(Context context) {
@@ -39,13 +40,28 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         init(context, attrs);
     }
 
+    InputConnection inputConnection;
+    ScaleGestureDetector scaleDetector;
+    GestureDetector tapDetector;
+    LinearLayout pad;
     Button btn_result;
+
     private Handler handler = new Handler();
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void init(Context context, @Nullable AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.pad, this, true);
 
+        // Entire Pad
+        pad = findViewById(R.id.pad_layout_root);
+        setPadScaleFactor(1.49f);
+        setPadScaleFactor(1.49f);
+
+        // Detectors
+        tapDetector =  new GestureDetector(context, new SingleTapConfirm());
+        scaleDetector = new ScaleGestureDetector(context, new ScaleListener());
+
+        // Numbers
         Button btn_num1 = (Button)findViewById(R.id.btn_num_1);
         btn_num1.setOnClickListener(this);
         Button btn_num2 = (Button)findViewById(R.id.btn_num_2);
@@ -247,6 +263,55 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         btn_result.setEnabled(true);
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        scaleDetector.onTouchEvent(ev);
+        return false;
+    }
+
+    private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent event) {
+            return true;
+        }
+    }
+
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+        float factor = 1.49f;
+
+        @Override
+        public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
+            factor *= scaleGestureDetector.getScaleFactor();
+            factor = Math.max(1, Math.min(factor, ResourcesCompat.getFloat(getResources(), R.dimen.pad_large)));
+            factor = ((float)((int)(factor * 100))) / 100;
+
+            setPadScaleFactor(factor);
+            Log.i("Scale: ", "Scaling... Factor: " + factor);
+            return true;
+        }
+
+        @Override
+        public void onScaleEnd(ScaleGestureDetector scaleGestureDetector){
+            if (factor <= 1.05f) {
+                factor = ResourcesCompat.getFloat(getResources(), R.dimen.pad_small);
+            } else if (factor <= 1.3f) {
+                factor =  ResourcesCompat.getFloat(getResources(), R.dimen.pad_medium);
+            } else {
+                factor =  ResourcesCompat.getFloat(getResources(), R.dimen.pad_large);
+            }
+            Log.d("Scale: ", "Set scale to " + factor);
+            setPadScaleFactor(factor);
+        }
+    }
+
+    private void setPadScaleFactor(float factor) {
+        pad.setScaleX(factor);
+        pad.setScaleY(factor);
+        pad.setPivotX(0);
+        pad.setPivotY(pad.getHeight());
+    }
+
     private class HandleRemove implements OnTouchListener {
         boolean deleteThreadRunning = false;
         boolean cancelDeleteThread = false;
@@ -340,8 +405,6 @@ public class Pad extends LinearLayout implements View.OnClickListener {
             cancelDeleteThread = true;
         }
     }
-
-
 
     public void setInputConnection(InputConnection ic) {
         this.inputConnection = ic;

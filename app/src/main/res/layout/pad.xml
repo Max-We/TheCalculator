@@ -1,11 +1,11 @@
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
 <LinearLayout
+        android:id="@+id/pad_layout_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="4dp">
+        android:padding="4dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <LinearLayout
             android:id="@+id/Pad_row_1"
@@ -344,4 +344,3 @@
                 android:text="ln" />
         </LinearLayout>
     </LinearLayout>
-</merge>

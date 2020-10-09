@@ -15,6 +15,7 @@ import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -56,9 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         scaleDetector = new ScaleGestureDetector(this, new ScaleListener());
-
-        ScriptEngineManager mgr = new ScriptEngineManager();
-        js_engine = mgr.getEngineByName("javascript");
+        final GestureDetector tapDetector = new GestureDetector(this, new SingleTapConfirm());
         arity = new Symbols();
 
         // Output
@@ -77,16 +76,12 @@ public class MainActivity extends AppCompatActivity {
         pad.setInputConnection(ic);
         pad.setBtn_result(btn_result);
 
-
-
         btn_result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String result;
                 try {
                     if (formula_text.getText().length() > 0) {
-//                        BigDecimal c = new BigDecimal(js_engine.eval(formula_text.getText().toString()).toString()).setScale(2, RoundingMode.DOWN);
-                        Log.i("String to Calculate", formula_text.getText().toString());
                         Double c = arity.eval(formatExpression(formula_text.getText().toString()));
                         if(c.isNaN()) {
                             c = 0d;
@@ -114,9 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 btn_result.setEnabled(false);
             }
         });
-
-        ImageView trackpad = (ImageView) findViewById(R.id.trackpad);
-        final GestureDetector onSingleTap = new GestureDetector(this, new SingleTapConfirm());
     }
 
     private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
@@ -135,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             factor *= scaleGestureDetector.getScaleFactor();
             factor = Math.max(1, Math.min(factor, ResourcesCompat.getFloat(getResources(), R.dimen.pad_large)));
             setPadScaleFactor(factor);
-
+            Log.i("Scale: ", "Scaling...");
             return true;
         }
 
@@ -158,6 +150,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void setPadScaleFactor(float factor) {
+        pad.setScaleX(factor);
+        pad.setScaleY(factor);
+        pad.setPivotX(0);
+        pad.setPivotY(pad.getHeight());
+    }
+
     private String formatExpression(String expression) {
         // Cube Root
         expression = expression.replace(getResources().getString(R.string.root_cube), "cbrt");
@@ -176,12 +175,5 @@ public class MainActivity extends AppCompatActivity {
         expression = expression.replace(getResources().getString(R.string.power_of_inverse), "^-1");
 
         return expression;
-    }
-
-    private void setPadScaleFactor(float factor) {
-        pad.setScaleX(factor);
-        pad.setScaleY(factor);
-        pad.setPivotX(0);
-        pad.setPivotY(pad.getHeight());
     }
 }
