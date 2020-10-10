@@ -61,7 +61,6 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         pad.post(new Runnable() {
                      @Override
                      public void run() {
-                         int height = pad.getHeight();
                          setPadScaleFactor(1.49f);
                      }
                  });
