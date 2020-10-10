@@ -287,11 +287,12 @@ public class Pad extends LinearLayout implements View.OnClickListener {
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         float factor = 1.49f;
+        final float zoomSpeed = 0.5f;
 
         @Override
         public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
-            final float zoomSpeed = 0.9f;
-            factor *= (scaleGestureDetector.getScaleFactor()*zoomSpeed);
+            float newFactor = ((scaleGestureDetector.getScaleFactor() - 1) * zoomSpeed) + 1;
+            factor *= newFactor;
             factor = Math.max(1, Math.min(factor, ResourcesCompat.getFloat(getResources(), R.dimen.pad_large)));
             factor = ((float)((int)(factor * 100))) / 100;
             setPadScaleFactor(factor);
