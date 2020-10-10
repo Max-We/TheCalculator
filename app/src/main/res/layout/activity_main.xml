@@ -62,6 +62,7 @@
             android:textColor="@color/colorVeryDark"
             android:textSize="@dimen/textSize_ResultButton"
             android:elevation="@dimen/btn_result_elevation"
+            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="@id/btn_result"
             app:layout_constraintStart_toStartOf="@id/btn_result"
             app:layout_constraintTop_toTopOf="@id/btn_result" />

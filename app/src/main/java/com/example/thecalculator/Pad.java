@@ -55,8 +55,6 @@ public class Pad extends LinearLayout implements View.OnClickListener {
 
         // Entire Pad
         pad = findViewById(R.id.pad_layout_root);
-        setPadScaleFactor(1.49f);
-        setPadScaleFactor(1.49f);
 
         // Detectors
         tapDetector =  new GestureDetector(context, new SingleTapConfirm());
@@ -283,12 +281,10 @@ public class Pad extends LinearLayout implements View.OnClickListener {
 
         @Override
         public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
-            factor *= scaleGestureDetector.getScaleFactor();
+            factor *= (scaleGestureDetector.getScaleFactor());
             factor = Math.max(1, Math.min(factor, ResourcesCompat.getFloat(getResources(), R.dimen.pad_large)));
             factor = ((float)((int)(factor * 100))) / 100;
-
             setPadScaleFactor(factor);
-            Log.i("Scale: ", "Scaling... Factor: " + factor);
             return true;
         }
 
@@ -301,7 +297,7 @@ public class Pad extends LinearLayout implements View.OnClickListener {
             } else {
                 factor =  ResourcesCompat.getFloat(getResources(), R.dimen.pad_large);
             }
-            Log.d("Scale: ", "Set scale to " + factor);
+
             setPadScaleFactor(factor);
         }
     }
@@ -413,6 +409,5 @@ public class Pad extends LinearLayout implements View.OnClickListener {
     public void setInputConnection(InputConnection ic) {
         this.inputConnection = ic;
     }
-
-    public void setBtn_result(Button btn_result_reference) { this.btn_result = btn_result_reference; }
+    public void setBtnResult(Button btn_result_reference) { this.btn_result = btn_result_reference; }
 }
