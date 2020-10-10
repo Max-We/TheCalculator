@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.SoundEffectConstants;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -55,6 +56,15 @@ public class Pad extends LinearLayout implements View.OnClickListener {
 
         // Entire Pad
         pad = findViewById(R.id.pad_layout_root);
+
+        // Set Pad too zoomed in when launched
+        pad.post(new Runnable() {
+                     @Override
+                     public void run() {
+                         int height = pad.getHeight();
+                         setPadScaleFactor(1.49f);
+                     }
+                 });
 
         // Detectors
         tapDetector =  new GestureDetector(context, new SingleTapConfirm());

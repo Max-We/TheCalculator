@@ -32,12 +32,15 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Disable System keyboard
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                 WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
 
+        // Startup
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Code start
         arity = new Symbols();
 
         // Output
