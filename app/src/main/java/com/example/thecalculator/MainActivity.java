@@ -96,13 +96,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setPadScaleFactor(float factor) {
-        pad.setScaleX(factor);
-        pad.setScaleY(factor);
-        pad.setPivotX(0);
-        pad.setPivotY(pad.getHeight());
-    }
-
     private String formatExpression(String expression) {
         // Cube Root
         expression = expression.replace(getResources().getString(R.string.root_cube), "cbrt");
