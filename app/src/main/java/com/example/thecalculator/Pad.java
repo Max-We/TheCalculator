@@ -10,6 +10,7 @@ import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
@@ -323,12 +324,15 @@ public class Pad extends LinearLayout implements View.OnClickListener {
             {
                 case MotionEvent.ACTION_DOWN:
                 {
+                    view.setPressed(true);
+                    view.playSoundEffect(SoundEffectConstants.CLICK);
                     startDeleteThread();
                     return true;
                 }
 
                 case MotionEvent.ACTION_UP:
                 {
+                    view.setPressed(false);
                     stopDeleteThread();
                 }
 
