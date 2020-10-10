@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.javia.arity.Symbols;
 import org.javia.arity.SyntaxException;
+import org.javia.arity.Util;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -70,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
                             c = 0d;
                         }
 
+                        result = Util.doubleToString(c, 12, 5);
                         NumberFormat formatter = new DecimalFormat("0.#####E0");
                         if (!c.isInfinite()) {
-                            if (c.toString().length() > 10) {
-                                result = formatter.format(c) + "";
-                            } else {
-                                result = c + "";
+                            if (result.length() > 10) {
+                                Log.d("Result Debug: ", "Result: " + c.toString() + " Length: " + c.toString().length());
+                                result = formatter.format(Double.valueOf(result)) + "";
                             }
                         } else {
                             result = "u\221E";

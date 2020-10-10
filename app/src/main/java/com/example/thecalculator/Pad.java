@@ -61,7 +61,7 @@ public class Pad extends LinearLayout implements View.OnClickListener {
         pad.post(new Runnable() {
                      @Override
                      public void run() {
-                         setPadScaleFactor(1.49f);
+                         setPadScaleFactor(ResourcesCompat.getFloat(getResources(), R.dimen.pad_large));
                      }
                  });
 
@@ -290,7 +290,8 @@ public class Pad extends LinearLayout implements View.OnClickListener {
 
         @Override
         public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
-            factor *= (scaleGestureDetector.getScaleFactor());
+            final float zoomSpeed = 0.9f;
+            factor *= (scaleGestureDetector.getScaleFactor()*zoomSpeed);
             factor = Math.max(1, Math.min(factor, ResourcesCompat.getFloat(getResources(), R.dimen.pad_large)));
             factor = ((float)((int)(factor * 100))) / 100;
             setPadScaleFactor(factor);
